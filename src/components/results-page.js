@@ -160,12 +160,21 @@ class ResultPage {
 
       if (!objectID || !queryID) return;
 
-      aa('convertedObjectIDsAfterSearch', {
-        index: process.env.ALGOLIA_INDEX,
-        eventName: 'Added To Wishlist',
-        objectIDs: [objectID],
-        queryID,
-      });
+      // TOGGLE UI STATE
+      const isActive = wishlistBtn.classList.toggle('is-active');
+
+      wishlistBtn.innerHTML = isActive ? '♥' : '♡';
+      wishlistBtn.title = isActive ? 'Remove from wishlist' : 'Add to wishlist';
+      wishlistBtn.setAttribute('aria-label',isActive ? 'Remove from wishlist' : 'Add to wishlist');
+      // TRIGGER ONLY IF ADD TO WISHLIST IS ACTIVE
+      if (isActive) {
+        aa('convertedObjectIDsAfterSearch', {
+          index: process.env.ALGOLIA_INDEX,
+          eventName: 'Added To Wishlist',
+          objectIDs: [objectID],
+          queryID,
+        });
+      }
     });
   }
 }

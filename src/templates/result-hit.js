@@ -36,8 +36,10 @@ const resultHit = (hit) => `
       <button
         type="button"
         class="result-hit__wishlist"
+        aria-label="Add to wishlist"
+        title="Add to wishlist"
       >
-        ♡ Wishlist
+        ♡
       </button>
 
       <!-- ADD TO CART -->
